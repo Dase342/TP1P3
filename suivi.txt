@@ -1,0 +1,11 @@
+David To
+Imprime la facture : créer Classe Facture. La classe appel des méthodes de GererCommande et imprime une facture aux terminal.
+
+Calcule les taxes dans Facture.
+
+Empèche l'affichage d'un client avec 0$.
+
+Pierre Rafael Vellone
+Créer Classe GererCommande : gère et sauvegarde les exceptions des commandes.
+
+Modifier textFile : sauvegarde d'un fichier texte.
