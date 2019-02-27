@@ -1,0 +1,60 @@
+Imprime la facture :créer Classe Facture. La classe appel des méthodes de GererCommande et imprime une facture aux terminal.
+
+Class: Facture{
+		private gererCommande;
+		private list<String> listString;
+		
+		Méthode: 
+		Constructeur (GererCommande){
+			gererCommande <- GererCommande;
+			
+		}
+		
+		calculeFacture{
+			// ajoute aux client la somme de tous les commande par client
+			
+			Faire une boucle for pour chaque commande de la liste listCommande{
+				appel getListCommande de gererCommande,
+				appel getClient de listCommande,
+				appel addTotal de client;
+				
+
+			}
+			compteur = 1;
+			Imprime( "Bienvenue chez Barette!\nFactures: ");
+			
+			listString <- "Bienvenue chez Barette!\nFactures: ";
+			Faire une boucle for pour chaque client de listClient{
+				
+				tax<- calculeTaxes(client.getTotal)
+				Imprime(client.getNom + tax + "$")
+				//insert a la liste si un client n'a 0$ pas sur la commande
+				SI (client.getTotal != 0) alors {
+				listString ajoute( client.getNom + tax + "$");
+				
+				}
+				
+			}
+			
+		}
+
+
+Calculer les taxes : calcule les taxes dans la classe Facture en utilisant une méthode.
+		Facture{
+			calculeTaxes(int montant){
+				montant <- montant * 1.10;
+				
+				retour montant <- montant * 1.05;
+				
+			}
+		}
+
+
+Sortie d'un fichier : enregistre les données dans un fichier texte.
+		enregistrerFacture{
+			String[] tab <- new String[listString.size()];
+			tab <- listString.toArray(tab);
+			initialise TextFile(tab);
+			TextFile.saveFile(nom);
+		}
+
