@@ -1,0 +1,57 @@
+Class: GererCommande{
+		Private TextFile fichierText;
+		Private List<Client> listClient(get)
+		Private List<Plat> listPLat(get)
+		Private List<Commande> listCommande(get)
+		Private List<String> listErreur(get)
+
+	Methode:
+		Constructeur(TextFile){
+			appele newText(TextFile)
+		}
+		Public newText(TextFile){
+			affet TextFile dans fichierText
+			appele update
+		}
+		Private update(){
+		
+			dans le cas de modification du fichierText re appelle les methode pour rafreshir
+			les listClient
+			
+			listErrer = new
+			Appele creerClient()
+			Appele creerPlat()
+			Appele creerCommande()	
+		}
+		
+		Private creerClient(){
+			scan le fichierText pour retrouver les string dans la section "Clients:"
+			et les convertie en Object client et les ajout dans la listClient.
+		
+			Si il y a une erreur, une string avec un message d'erreur est ajouter a listErreur.
+		}
+		Private creerPlat(){
+			scan le fichierText pour retrouver les string dans la section "Plats:"
+			et les convertie en Object Plat et les ajout dans la listPlat.
+		
+			Si il y a une erreur, une string avec un message d'erreur est ajouter a listErreur.
+		}
+		Private creerCommande(){
+			scan le fichierText pour retrouver les string dans la section "Commandes:"
+			et les convertie en Object Commande et les ajout dans la listCommande.
+		
+			Si il y a une erreur, une string avec un message d'erreur est ajouter a listErreur.
+		}
+}
+
+
+Class: TextFile{
+	Methode:
+		@surcharge
+		constructeur(String[]){
+			affecter le String[] dans le string[] de Textfile.
+		}
+		 Puplic saveFile(String){
+			enregiste le fichier avec le nom specifier dans le string.
+		}
+}
