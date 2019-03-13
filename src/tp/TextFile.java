@@ -23,6 +23,7 @@ public class TextFile{
 	public String[] getText() {
 		return file;
 	}
+	
 	@Deprecated 
 	public List<Client> getClient(){
 		List<Client> client = new ArrayList<Client>();
