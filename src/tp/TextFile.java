@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class TextFile{
 
-	String[] file;
+	private String[] file;
 	
 	public TextFile(String path){
 		try {
@@ -20,6 +20,10 @@ public class TextFile{
 		}
 	}
 	
+	public String[] getText() {
+		return file;
+	}
+	@Deprecated 
 	public List<Client> getClient(){
 		List<Client> client = new ArrayList<Client>();
 		boolean dansClient = false;
@@ -36,7 +40,7 @@ public class TextFile{
 		}
 		return client;
 	}
-		
+	@Deprecated
 	public List<Plat> getPlat(){
 		List<Plat> plats = new ArrayList<Plat>();
 		boolean dansPlats = false;
@@ -54,8 +58,8 @@ public class TextFile{
 		}
 		return plats;
 	}
-		
-		public List<Commande> getCommandes(List<Client> listClient, List<Plat> listPlat){
+	@Deprecated
+	public List<Commande> getCommandes(List<Client> listClient, List<Plat> listPlat){
 			List<Commande> commandes = new ArrayList<Commande>();
 			Client client;
 			Plat plat;
