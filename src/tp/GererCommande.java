@@ -20,6 +20,14 @@ public class GererCommande {
 
 	public void newText( TextFile texte ) {
 		this.fichierText = texte;
+		update();
+	}
+	
+	public void update() {
+		listErreur = new ArrayList<String>();
+		creerClient();
+		creerPlat();
+		creerCommande();
 	}
 
 	public void creerClient() {
