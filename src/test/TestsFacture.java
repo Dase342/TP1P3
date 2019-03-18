@@ -46,7 +46,7 @@ class TestsFacture {
 	
 	@Test
 	void testCalculeTaxes() {
-		double testDix = Facture.calculeTaxes(10);
+		double testDix = facture.calculeTaxes(10);
 		assertEquals(11.5, testDix,0.01);
 	}
 	
