@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Facture {
 	private GererCommande gererCommande;
-	private ArrayList<String> listString;
+	private ArrayList<String> listFacture;
 	
 	public Facture(GererCommande commande){
 		gererCommande = commande;
@@ -22,7 +22,7 @@ public class Facture {
 		
 		System.out.println("Bienvenue chez Barette!\nFactures: ");
 		
-		listString.add("Bienvenue chez Barette!\nFactures: ");
+		listFacture.add("Bienvenue chez Barette!\nFactures: ");
 		
 		for (Client client : gererCommande.getClient()) {
 			double tax = calculeTaxes(client.getTotal());
@@ -30,12 +30,12 @@ public class Facture {
 			System.out.println(client.getNom() + tax + "$");
 			
 			if (client.getTotal() != 0) {
-				listString.add( client.getNom() + tax + "$");
+				listFacture.add( client.getNom() + tax + "$");
 			}
 		}
 	}
 
-	private double calculeTaxes(double montant) {
+	public double calculeTaxes(double montant) {
 		double tps,tvq;
 		tvq = montant * 0.10;
 		
@@ -48,9 +48,14 @@ public class Facture {
 	public void enregistrerFacture(){
 		DateFormat dateFormat = new SimpleDateFormat("dd-HH");
 		Date date = new Date();
-		String[] tab = new String[listString.size()];
-		tab = listString.toArray(tab);
+		String[] tab = new String[listFacture.size()];
+		tab = listFacture.toArray(tab);
 		TextFile text = new TextFile(tab);
 		text.save("Facture-du-"+dateFormat.format(date));
+	}
+	
+	public ArrayList<String> getFacture(){
+		
+		return listFacture;
 	}
 }
