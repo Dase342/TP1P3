@@ -42,4 +42,10 @@ public class Client {
        }
 		return equals;
 	}
+
+
+	public double getTotal() {
+		
+		return total;
+	}
 }
