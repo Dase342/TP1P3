@@ -2,6 +2,7 @@ package test;
 
 import tp.Client;
 import tp.Commande;
+import tp.GererCommande;
 import tp.Plat;
 import tp.TextFile;
 
@@ -28,10 +29,10 @@ class TestsFacture {
 	
 	@Before
 	void setUp() {
-		List<Client> testListClient = new ArrayList<Client>();
+		ArrayList<Client> testListClient = new ArrayList<Client>();
 		testListClient.add( new Client("Joe") );
 		
-		List<Commande> testListCommande = new ArrayList<Commande>();
+		ArrayList<Commande> testListCommande = new ArrayList<Commande>();
 		testListCommande.add(new Commande( new Client("Joe"), new Plat("poutine",15),2 ));
 		
 		Mockito.when(gererCommande.getClient()).thenReturn(testListClient);
