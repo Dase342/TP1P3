@@ -11,11 +11,6 @@ public class GererCommande {
 
 	public GererCommande( TextFile texte ) {
 		newText( texte );
-		listClient = new ArrayList<Client>();
-		listPlat = new ArrayList<Plat>();
-		listCommande = new ArrayList<Commande>();
-		listErreur = new ArrayList<String>();
-
 	}
 
 	public void newText( TextFile texte ) {
@@ -24,6 +19,9 @@ public class GererCommande {
 	}
 	
 	public void update() {
+		listClient = new ArrayList<Client>();
+		listPlat = new ArrayList<Plat>();
+		listCommande = new ArrayList<Commande>();
 		listErreur = new ArrayList<String>();
 		creerClient();
 		creerPlat();
@@ -35,19 +33,21 @@ public class GererCommande {
 		ArrayList<Client> client = new ArrayList<Client>();
 		boolean dansClient = false;
 
-		for ( int i = 0; i < text.length; i++ ) {
-			if ( text[i].equals( "Clients:" ) ) {
-				dansClient = true;
-			}
-			if ( text[i].equals( "Plats:" ) || text[i].equals( "Commandes:" ) ) {
+		for ( String ligne : text ) {
+			if ( ligne.equals( "Plats:" ) || ligne.equals( "Commandes:" ) ) {
 				dansClient = false;
 			}
 			if ( dansClient ) {
-				client.add( new Client( text[i] ) );
+				client.add( new Client( ligne ) );
 			}
+			if ( ligne.equals( "Clients:" ) ) {
+				dansClient = true;
+			}
+
 		}
 		if ( !client.isEmpty() ) {
-			client = listClient;
+			listClient = client;
+
 		} else {
 			listErreur.add( "Erreur! Creation de Client : Aucun Client Detecter." );
 		}
@@ -59,22 +59,23 @@ public class GererCommande {
 		boolean dansPlats = false;
 		String[] ligne = null;
 
-		for ( int i = 0; i < text.length; i++ ) {
-			if ( text[i].equals( "Plats:" ) ) {
-				dansPlats = true;
-			}
-			if ( text[i].equals( "Commandes:" ) || text[i].equals( "Clients:" ) ) {
+		for ( String line : text ) {
+			if ( line.equals( "Commandes:" ) || line.equals( "Clients:" ) ) {
 				dansPlats = false;
 			}
 			if ( dansPlats ) {
 				try {
-					ligne = text[i].split( " " );
+					ligne = line.split( " " );
 					plats.add( new Plat( ligne[0], Double.parseDouble( ligne[1] ) ) );
 				} catch ( Exception e ) {
-					listErreur.add( "Erreur! Creation de Plat : Plat mal formaté -> " + ligne );
+					listErreur.add( "Erreur! Creation de Plat : Plat mal formaté -> " + line );
 				}
 
 			}
+			if ( line.equals( "Plats:" ) ) {
+				dansPlats = true;
+			}
+
 		}
 		if ( !plats.isEmpty() ) {
 			listPlat = plats;
@@ -95,44 +96,41 @@ public class GererCommande {
 		String[] ligne;
 		int index = -1;
 
-		for ( int i = 0; i < text.length; i++ ) {
-
-			if ( text[i].equals( "Commandes:" ) ) {
-				dansCommande = true;
-			}
-			if ( text[i].equals( "Plats:" ) || text[i].equals( "Clients:" ) ) {
+		for ( String line : text ) {
+			if ( line.equals( "Plats:" ) || line.equals( "Clients:" ) ) {
 				dansCommande = false;
 			}
 			if ( dansCommande ) {
 				try {
-					ligne = text[i].split( " " );
-					qte = Integer.parseInt( ligne[2] );
-					index = listClient.indexOf( new Client( ligne[0] ) );
+					ligne = line.split( " " );
+					qte = Integer.parseInt( ligne[2]);
+					index = listClient.indexOf( new Client(ligne[0]));
 					client = listClient.get( index );
-					
+
 					try {
 						index = listPlat.indexOf( new Plat( ligne[1], 0 ) );
 						plat = listPlat.get( index );
-						
+
 						commandes.add( new Commande( client, plat, qte ) );
 					} catch ( Exception e ) {
-						listErreur.add( "Erreur! Creation de Commande : Plat non Creer-> " + text[i] );
+						listErreur.add( "Erreur! Creation de Commande : Plat non Creer-> " + line );
 					}
-					
-					
+
 				} catch ( Exception e ) {
-					listErreur.add( "Erreur! Creation de Commande : Client non Creer -> " + text[i] );
+					listErreur.add( "Erreur! Creation de Commande : Client non Creer -> " + line );
 				}
-				
-				
-				
 
 			}
-			if ( !commandes.isEmpty() ) {
-				listCommande = commandes;
-			} else {
-				listErreur.add( "Erreur! Creation de Commande : Aucune Commande Detecter." );
+
+			if ( line.equals( "Commandes:" ) ) {
+				dansCommande = true;
 			}
+
+		}
+		if ( !commandes.isEmpty() ) {
+			listCommande = commandes;
+		} else {
+			listErreur.add( "Erreur! Creation de Commande : Aucune Commande Detecter." );
 		}
 	}
 

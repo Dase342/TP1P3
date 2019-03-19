@@ -1,9 +1,8 @@
 package test;
 
-import tp.Client;
-import tp.Commande;
+
+import tp.Facture;
 import tp.GererCommande;
-import tp.Plat;
 import tp.TextFile;
 
 import org.junit.After;
@@ -13,50 +12,37 @@ import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Mockito.*;
-
-class TestsFacture {
+public class TestsFacture {
 	
 	Facture facture;
-	
-	@Mock
-	private GererCommande gererCommande;
+	GererCommande gererCommande;
+	String[] text = {"Client:","Joe","Plat:","Frite 5","Commande:","Joe Frite 1"};
 	
 	@Before
-	void setUp() {
-		ArrayList<Client> testListClient = new ArrayList<Client>();
-		testListClient.add( new Client("Joe") );
-		
-		ArrayList<Commande> testListCommande = new ArrayList<Commande>();
-		testListCommande.add(new Commande( new Client("Joe"), new Plat("poutine",15),2 ));
-		
-		Mockito.when(gererCommande.getClient()).thenReturn(testListClient);
-		Mockito.when(gererCommande.getCommande()).thenReturn(testListCommande);
+	public void setUp() {
+		gererCommande = new GererCommande(new TextFile(text));
+		facture = new Facture(gererCommande);
 		
 	}
 	@After
-	void tearDown(){
+	public void tearDown(){
 		gererCommande = null;
 	}
 	
 	@Test
-	void testCalculeTaxes() {
+	public void testCalculeTaxes() {
 		double testDix = facture.calculeTaxes(10);
-		assertEquals(11.5, testDix,0.01);
+		assertEquals(11.5, testDix,0.10);
 	}
 	
 	@Test
-	void testCalculeFacture() {
-		facture = new Facture(gererCommande);
-		String[] expected = {"","",""};
-		String[] result = {"","",""};
+	public void testCalculeFacture() {
 		
-		result = facture.getFacture;
+		String[] expected = {"Bienvenue chez Barette!","Factures: ","Joe: 10.15$"};
+		String[] result;
+		
+		result = (String[]) facture.getFacture().toArray();
+		System.out.println( result );
 		assertArrayEquals(expected,result);
 	}
 }
