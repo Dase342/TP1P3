@@ -16,7 +16,7 @@ public class TestsFacture {
 	
 	Facture facture;
 	GererCommande gererCommande;
-	String[] text = {"Client:","Joe","Plat:","Frite 5","Commande:","Joe Frite 1"};
+	String[] text = {"Clients:","Joe","Plats:","Frite 5","Commandes:","Joe Frite 2"};
 	
 	@Before
 	public void setUp() {
@@ -27,6 +27,7 @@ public class TestsFacture {
 	@After
 	public void tearDown(){
 		gererCommande = null;
+		facture = null;
 	}
 	
 	@Test
@@ -38,11 +39,10 @@ public class TestsFacture {
 	@Test
 	public void testCalculeFacture() {
 		
-		String[] expected = {"Bienvenue chez Barette!","Factures: ","Joe: 10.15$"};
-		String[] result;
-		
-		result = (String[]) facture.getFacture().toArray();
-		System.out.println( result );
+		String[] expected = {"Bienvenue chez Barette!","Factures:","Joe: 11.5$"};
+		String[] result = new String[facture.getFacture().size()];
+		result = facture.getFacture().toArray(result);
 		assertArrayEquals(expected,result);
+		
 	}
 }
