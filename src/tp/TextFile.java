@@ -39,6 +39,7 @@ public class TextFile{
 			out.close();
 		} catch ( FileNotFoundException e ) {
 			System.out.println( "TextFile save Error" );
+			
 		}
 	}
 	

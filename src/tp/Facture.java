@@ -58,6 +58,7 @@ public class Facture {
 		
 		montant = montant + tps + tvq;
 		return montant;
+		
 	}
 	
 	public void enregistrerFacture(){
