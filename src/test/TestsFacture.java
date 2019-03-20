@@ -16,13 +16,12 @@ public class TestsFacture {
 	
 	Facture facture;
 	GererCommande gererCommande;
-	String[] text = {"Clients:","Joe","Plats:","Frite 5","Commandes:","Joe Frite 2"};
+	String[] text = {"Clients:","Joe","Plats:","Frite 5","Commandes:","Joe Frite 2"}; 
 	
 	@Before
 	public void setUp() {
 		gererCommande = new GererCommande(new TextFile(text));
 		facture = new Facture(gererCommande);
-		
 	}
 	@After
 	public void tearDown(){
