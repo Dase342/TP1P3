@@ -18,26 +18,29 @@ import tp.TextFile;
 public class gererCommandeTest {
 	
 	private GererCommande commande;
+	private String[] text = {"Clients:","Bob","Plats:","Poulet 5","Commandes:","Bob Poulet 3"};
 	
 	@Before
 	public void avant(){
-		commande = new GererCommande(new TextFile(System.getProperty("user.dir")+"\\tp1.txt"));
+		commande = new GererCommande(new TextFile(text));
 		
 	}
 	@Test
 	public void testUpdate() {
 		commande.update();
-		List<Client> tempClient = commande.getClient();
-		List<Plat> tempPlat = commande.getPlat();
+	
 		List<Commande> tempCommande = commande.getCommande();
 		
-		List<Client> exUn = new ArrayList<>();
-		List<Plat> exDeux = new ArrayList<>();
-		List<Commande> exTrois = new ArrayList<>();
 		
-		assertEquals(exUn, tempClient);
-		assertEquals(exDeux, tempPlat);
-		assertEquals(exTrois, tempCommande);
+		Client exUn = new Client("Bob");
+		Plat exDeux = new Plat("Poulet", 5);
+		Commande exTrois = new Commande(exUn, exDeux, 3);		
+	
+		assertEquals(exUn,tempCommande.get(0).getClient());
+		assertEquals(exDeux,tempCommande.get(0).getPlat());
+		assertEquals(exTrois.getQte(),tempCommande.get(0).getQte());
+		
+		
 	}
 
 	@Test
@@ -45,9 +48,8 @@ public class gererCommandeTest {
 		commande.creerClient();
 		List<Client> tempClient = commande.getClient();
 		List<Client> expected = new ArrayList<>();
-		expected.add(new Client("Roger"));
-		expected.add(new Client("Céline"));
-		expected.add(new Client("Steeve"));
+		expected.add(new Client("Bob"));
+		
 		
 		assertEquals(expected, tempClient);
 	}
@@ -57,9 +59,8 @@ public class gererCommandeTest {
 		commande.creerPlat();
 		List<Plat> tempPlat = commande.getPlat();
 		List<Plat> expected = new ArrayList<>();
-		expected.add(new Plat("Poutine",10.5));
-		expected.add(new Plat("Frites",2.5));
-		expected.add(new Plat("Repas_Poulet",15.75));
+		expected.add(new Plat("Poulet",5));
+
 	
 		
 		assertEquals(expected, tempPlat);
@@ -68,21 +69,22 @@ public class gererCommandeTest {
 	
 	@Test
 	public void testCreerCommande(){
-
+		commande.creerClient();
+		commande.creerPlat();
 		
 		commande.creerCommande();
 
 		List<Commande> tempCommande = commande.getCommande();
-		List<Commande> expected = new ArrayList<>();
 		
 		
-		expected.add(new Commande(new Client("Roger"), new Plat("Poutine",10.5), 1));
-		expected.add(new Commande(new Client("Céline"), new Plat("Frites",2.5), 2));
-		expected.add(new Commande(new Client("Steeve"), new Plat("Repas_Poulet",15.75), 1));
+		
+		Commande expected = new Commande(new Client("Bob"), new Plat("Poulet",5), 3);
 		
 	
 		
-		assertEquals(expected, tempCommande);
+		assertEquals(expected.getClient(), tempCommande.get(0).getClient());
+		assertEquals(expected.getPlat(), tempCommande.get(0).getPlat());
+		assertEquals(expected.getQte(), tempCommande.get(0).getQte());
 	}
 	
 	
