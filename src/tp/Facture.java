@@ -11,10 +11,23 @@ public class Facture {
 	
 	public Facture(GererCommande commande){
 		gererCommande = commande;
+		listFacture = new ArrayList<String>();
+		
+		calculeFacture();
+		
 	}
 	
 	public void calculeFacture(){
-		for (Commande commande : gererCommande.getCommande()) {
+		//affichage Erreur
+		ArrayList<String> erreur = gererCommande.getErreur();
+		
+		for(String e : erreur) {
+			System.out.println( e );
+		}
+		//Affichage facture
+		ArrayList<Commande> listCommande = gererCommande.getCommande();
+		
+		for (Commande commande : listCommande) {
 			commande.getClient().addTotal(commande.getTotale());
 		}
 		
@@ -22,15 +35,17 @@ public class Facture {
 		
 		System.out.println("Bienvenue chez Barette!\nFactures: ");
 		
-		listFacture.add("Bienvenue chez Barette!\nFactures: ");
+		listFacture.add("Bienvenue chez Barette!");
+		listFacture.add("Factures:");
 		
-		for (Client client : gererCommande.getClient()) {
+		ArrayList<Client> listClient =  gererCommande.getClient();
+		for (Client client : listClient) {
 			double tax = calculeTaxes(client.getTotal());
 			
-			System.out.println(client.getNom() + tax + "$");
+			System.out.println(client.getNom() + ": " + tax + "$");
 			
 			if (client.getTotal() != 0) {
-				listFacture.add( client.getNom() + tax + "$");
+				listFacture.add( client.getNom() + ": " + tax + "$");
 			}
 		}
 	}
@@ -46,12 +61,12 @@ public class Facture {
 	}
 	
 	public void enregistrerFacture(){
-		DateFormat dateFormat = new SimpleDateFormat("dd-HH");
+		DateFormat dateFormat = new SimpleDateFormat("dd-HH\uA789mm");
 		Date date = new Date();
 		String[] tab = new String[listFacture.size()];
 		tab = listFacture.toArray(tab);
 		TextFile text = new TextFile(tab);
-		text.save("Facture-du-"+dateFormat.format(date));
+		text.save("Facture-du-"+dateFormat.format(date)+".txt");
 	}
 	
 	public ArrayList<String> getFacture(){
