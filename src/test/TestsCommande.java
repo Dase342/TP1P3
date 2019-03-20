@@ -36,6 +36,7 @@ public class TestsCommande {
 		commande.setClient( expected );
 		
 		assertEquals(expected,commande.getClient());
+		
 	}
 	@Test
 	public void testSetPlat() {

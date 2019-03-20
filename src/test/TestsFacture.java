@@ -22,6 +22,7 @@ public class TestsFacture {
 	public void setUp() {
 		gererCommande = new GererCommande(new TextFile(text));
 		facture = new Facture(gererCommande);
+		
 	}
 	@After
 	public void tearDown(){
@@ -33,6 +34,7 @@ public class TestsFacture {
 	public void testCalculeTaxes() {
 		double testDix = facture.calculeTaxes(10);
 		assertEquals(11.5, testDix,0.10);
+		
 	}
 	
 	@Test

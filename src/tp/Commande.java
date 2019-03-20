@@ -31,5 +31,6 @@ public class Commande {
 	public double getTotale(){
 		
 		return plat.getPrixPlat()*getQte();
+		
 	}
 }
