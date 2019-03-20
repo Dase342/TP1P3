@@ -16,6 +16,7 @@ public class Main {
 		GererCommande gererCommande = new GererCommande(new TextFile(System.getProperty("user.dir")+"\\" + fic));
 		Facture facture = new Facture(gererCommande);
 		facture.enregistrerFacture();
+		
 	}
 
 }

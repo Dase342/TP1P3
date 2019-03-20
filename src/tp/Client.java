@@ -38,6 +38,7 @@ public class Client {
        if(obj instanceof Client) {
     	   if (this.getNom().equals( ( (Client) obj ).getNom())) {
     		   equals = true;
+    		   
     	   }
        }
 		return equals;

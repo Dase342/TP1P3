@@ -32,6 +32,7 @@ public class Plat {
 		if ( obj instanceof Plat ) {
 			if ( this.getNomPlat().equals( ( (Plat) obj ).getNomPlat() ) ) {
 				equals = true;
+				
 			}
 		}
 		return equals;

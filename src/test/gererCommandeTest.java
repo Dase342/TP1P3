@@ -52,6 +52,7 @@ public class gererCommandeTest {
 		
 		
 		assertEquals(expected, tempClient);
+		
 	}
 	
 	@Test

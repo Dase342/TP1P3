@@ -26,6 +26,7 @@ public class GererCommande {
 		creerClient();
 		creerPlat();
 		creerCommande();
+		
 	}
 
 	public void creerClient() {

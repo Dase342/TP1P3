@@ -27,5 +27,6 @@ public class testPlat {
 		Plat test = new Plat("Poutine", 2.5);
 		
 		assertEquals(test,un);
+		
 	}
 }
