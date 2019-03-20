@@ -7,12 +7,13 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+
 
 import tp.Client;
 import tp.Commande;
 import tp.GererCommande;
 import tp.Plat;
+import tp.TextFile;
 
 public class gererCommandeTest {
 	
@@ -20,7 +21,7 @@ public class gererCommandeTest {
 	
 	@Before
 	public void avant(){
-		commande = Mockito.mock(GererCommande.class);
+		commande = new GererCommande(new TextFile(System.getProperty("user.dir")+"\\tp1.txt"));
 		
 	}
 	@Test
