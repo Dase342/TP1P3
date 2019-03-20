@@ -101,24 +101,31 @@ public class GererCommande {
 			if ( line.equals( "Plats:" ) || line.equals( "Clients:" ) ) {
 				dansCommande = false;
 			}
-			if ( dansCommande ) {
+			if (dansCommande) {
 				try {
-					ligne = line.split( " " );
-					qte = Integer.parseInt( ligne[2]);
-					index = listClient.indexOf( new Client(ligne[0]));
-					client = listClient.get( index );
+					ligne = line.split(" ");
+					
+						
+						index = listClient.indexOf(new Client(ligne[0]));
+						client = listClient.get(index);
+						
+						try {
+						qte = Integer.parseInt(ligne[2]);
 
-					try {
-						index = listPlat.indexOf( new Plat( ligne[1], 0 ) );
-						plat = listPlat.get( index );
+						try {
+							index = listPlat.indexOf(new Plat(ligne[1], 0));
+							plat = listPlat.get(index);
 
-						commandes.add( new Commande( client, plat, qte ) );
-					} catch ( Exception e ) {
-						listErreur.add( "Erreur! Creation de Commande : Plat non Creer-> " + line );
+							commandes.add(new Commande(client, plat, qte));
+						} catch (Exception e) {
+							listErreur.add("Erreur! Creation de Commande : Plat non Creer-> " + line);
+						}
+					} catch (Exception e) {
+						listErreur.add("Erreur! Creation de Commande : Commande mal formaté -> " + line);
 					}
 
-				} catch ( Exception e ) {
-					listErreur.add( "Erreur! Creation de Commande : Client non Creer -> " + line );
+				} catch (Exception e) {
+					listErreur.add("Erreur! Creation de Commande : Client non Creer -> " + line);
 				}
 
 			}
