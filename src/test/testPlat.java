@@ -11,10 +11,10 @@ public class testPlat {
 	@Test
 	public void testPlatSetNomPlat(){
 		Plat un = new Plat("Poutine",10.5);
-		un.setNomPlat("poulet");
+		un.setNomPlat("Poulet");
 		Plat test = new Plat("Poulet", 10.5);
 		
-		assertEquals(test, un);
+		assertEquals(test.getNomPlat(), un.getNomPlat());
 		
 	}
 	
